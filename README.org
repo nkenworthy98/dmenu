@@ -1,0 +1,42 @@
+#+TITLE: dmenu - dynamic menu
+
+* dmenu
+dmenu is an efficient dynamic menu for X.
+
+* Requirements
+In order to build dmenu you need the Xlib header files.
+
+* Installation
+Edit config.mk to match your local setup (dmenu is installed into
+the /usr/local namespace by default).
+
+Afterwards enter the following command to build and install dmenu
+(if necessary as root):
+
+#+begin_src shell
+make clean install
+#+end_src
+
+* Running dmenu
+See the man page for details.
+
+* Patches and Other Changes
+** Patches
+- [[https://tools.suckless.org/dmenu/patches/alpha/][dmenu-alpha-20210605-1a13d04.diff]] (transparency)
+  + Make sure to add Xrender to LIBS in =config.mk=. Without doing this, I wasn't able to get transparency to work.
+
+    To do this, change
+    #+begin_src shell
+LIBS = -L$(X11LIB) -lX11 $(XINERAMALIBS) $(FREETYPELIBS)
+    #+end_src
+    to
+    #+begin_src shell
+LIBS = -L$(X11LIB) -lX11 $(XINERAMALIBS) $(FREETYPELIBS) -lXrender
+    #+end_src
+
+** Config.h Changes
+- Changed font to =Terminus=
+- Changed status bar colors:
+  + Foreground: =#2d6280=
+  + Background: =#000000=
+- Added and configured any variables required for patches
